@@ -1,3 +1,7 @@
+import pygame
+
+pygame.mixer.init()
+som = pygame.mixer.Sound("sons/confirma-urna.wav")
 senha_mesario = "1234"
 candidatos = {
     "10": {"nome": "Ana Souza", "partido": "Partido do Café"},
@@ -38,6 +42,8 @@ while True:
         else:
             nulos += 1
         print("Voto registrado!")
+        som.play()
+        pygame.time.wait(int(som.get_length() * 1000))
     else:
         print("Voto cancelado.")
 
