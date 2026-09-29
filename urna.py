@@ -8,27 +8,31 @@ votos = {numero: 0 for numero in candidatos}
 brancos = 0
 nulos = 0
 
-numero = input("Digite o número (ou 'b' para branco): ")
+while True:
+    numero = input("Digite o número (ou 'b' para branco): ")
 
-if numero == "b":
-    tipo = "branco"
-elif numero in candidatos:
-    tipo = "candidato"
-    print("Nome:", candidatos[numero]["nome"])
-    print("Partido:", candidatos[numero]["partido"])
-else:
-    tipo = "nulo"
-    print("Número inexistente.")
-
-acao = input("Confirmar (c) ou corrigir (x)? ")
-
-if acao == "c":
-    if tipo == "candidato":
-        votos[numero] += 1
-    elif tipo == "branco":
-        brancos += 1
+    if numero == "b":
+        tipo = "branco"
+    elif numero in candidatos:
+        tipo = "candidato"
+        print("Nome:", candidatos[numero]["nome"])
+        print("Partido:", candidatos[numero]["partido"])
     else:
-        nulos += 1
-    print("Voto registrado!")
-else:
-    print("Voto cancelado.")
+        tipo = "nulo"
+        print("Número inexistente.")
+
+    acao = input("Confirmar (c) ou corrigir (x)? ")
+
+    if acao == "c":
+        if tipo == "candidato":
+            votos[numero] += 1
+        elif tipo == "branco":
+            brancos += 1
+        else:
+            nulos += 1
+        print("Voto registrado!")
+    else:
+        print("Voto cancelado.")
+
+    print("-" * 30)
+    print(votos, brancos, nulos)
