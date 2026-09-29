@@ -1,3 +1,4 @@
+senha_mesario = "1234"
 candidatos = {
     "10": {"nome": "Ana Souza", "partido": "Partido do Café"},
     "20": {"nome": "Bruno Lima", "partido": "Partido do Bolo"},
@@ -9,7 +10,13 @@ brancos = 0
 nulos = 0
 
 while True:
-    numero = input("Digite o número (ou 'b' para branco): ")
+    numero = input("Digite o número ('b' para branco, 'fim' para encerrar): ")
+    if numero == "fim":
+        senha = input("Senha do mesário: ")
+        if senha == senha_mesario:
+            break
+        print("Senha incorreta.")
+        continue    
 
     if numero == "b":
         tipo = "branco"
@@ -34,5 +41,17 @@ while True:
     else:
         print("Voto cancelado.")
 
-    print("-" * 30)
-    print(votos, brancos, nulos)
+print("\n=== RESULTADO FINAL ===")
+for numero, total in votos.items():
+    print(candidatos[numero]["nome"], "-", total, "votos")
+print("Brancos:", brancos)
+print("Nulos:", nulos)
+
+maior = max(votos.values())
+vencedores = [candidatos[n]["nome"] for n, t in votos.items() if t == maior]
+if maior == 0:
+    print("Nenhum voto válido.")
+elif len(vencedores) > 1:
+    print("Empate entre:", ", ".join(vencedores))
+else:
+    print("Vencedor:", vencedores[0])
